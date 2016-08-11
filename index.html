@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="eng"><![endif]-->
+<!--[if IE 9 ]><html class="no-js ie ie9" lang="ensg"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="ru"><!--<![endif]-->
+
+<head>
+
+	<title>Self Services</title>
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+
+    <link href=' https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,600italic,700,300,400italic,800' rel='stylesheet' type='text/css'>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container">
+            <header class="page__header">
+                <h1 class="page__maintitle"></h1>
+            </header>
+
+            <button class="go-filter-js"> Go to Filter</button>
+
+            <div class=filter>
+                <header class="filter__header">
+                    <h1 class="filter__maintitle">Выберете друзей</h1>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </header><!-- /filter__header  -->
+
+                <div class="filter__body">
+                    <div class="filter__search">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Начните вводить имя друга" value=""  name="" > <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Название" value=""  name="" >
+                            </div>
+                        </div>
+                    </div><!-- /filter__search -->
+
+                    <div class="filter__list-wrap">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                                <div class="filter__list-container">
+                                    <div id="results"></div>
+                                    <script type="text/x-handlebars-template" id="friendsItem">
+                                        <ul class="filter__list filter-list-all-js"  id="friendsList">
+                                                {{#each list}}
+                                                <li class="filter__item">
+                                                    <div class="filter__row">
+                                                            <figure><img src="{{ photo_100}}" alt="{{first_name}} {{last_name}}" class="pull-left" style="margin-right: 20px;"></figure>
+
+                                                            <div class="caption" style="overflow: hidden;">
+                                                                <h3><span>{{first_name}} </span> <span>{{last_name}} </span></h3>
+                                                            </div>
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </div>
+                                                </li>
+                                                {{/each}}
+                                        </ul>
+                                    </script>
+
+                                </div><!-- /filter-list-container -->
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <ul class="filter__list  filter-list-created-js" id="">
+                                    <li></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div><!-- /filter__list-wrap -->
+
+                </div><!-- /filter__body -->
+
+                <footer class="filter__footer">
+                    <button class="filter__btn filter-save-js">Сохранить</button>
+                </footer><!-- /filter__header  -->
+            </div><!-- /filter -->
+
+        </div>
+    </div>
+<script src="public/js/script.js"></script>
+
+<noscript>
+    <div class="no-js-info"><p>Для корректной работы сайта включите поддержку JavaScript в настройках браузера и
+        обновите страницу.</p></div>
+</noscript>
+
+</body>
+
+
+</html>

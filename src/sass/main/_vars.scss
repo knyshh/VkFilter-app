@@ -1,0 +1,63 @@
+//mixin
+@mixin box-shadow($top, $left, $blur, $size, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $size $color;
+    -moz-box-shadow:inset $top $left $blur $size $color;
+    box-shadow:inset $top $left $blur $size $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $size $color;
+    -moz-box-shadow: $top $left $blur $size $color;
+    box-shadow: $top $left $blur $size $color;
+  }
+}
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+// Variables
+// --------------------------------------------------
+$main-bg: #edf0f5;
+$white: #fff;
+$default-color: #3a3a3a;
+$default-h-color: #333;
+$blue: #5bb2d8;
+$dark-blue: #468cc1;
+$dark-panel: #4d4e4e;
+$light-gray: #9c9c9c;
+$yellow: #f8c44f;
+$hover-bg-list: #d8dfea;
+$block-border: #d8dfea;
+
+$bottom-panel-question: #f5f8fd;
+$btn-prev: #bacedd;
+
+$border-leftpanel: #d8dfea;
+
+$green: #58d18d;
+$red: #FF521C;
+$gray-txt: #aaadb0;
+/*btn*/
+
+$btn-handsoff: #f5f8fd;
+$btn-disabled: #d8dfea;
+
+/* forms */
+$placeholder-txt: #a3a3a3;
+$defaul-txt-form:  #000;
+$bg-inputs-form: #fff;
+
+//trasition
+$gTransition: all .3s ease;
+$gTransitionLinear: all .2s linear;
+
+//fonts
+$fontDefault:  'Open Sans', sans-serif;
+$fontcoquette:  'coquette_regularregular';
+$fontOpenSans:  'Open Sans', sans-serif;
+
+$radio-bg: #fbfdff;
+
+
+
+

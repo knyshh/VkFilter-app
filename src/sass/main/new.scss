@@ -1,0 +1,522 @@
+
+.banner__img {
+  padding-bottom: 15px;
+
+  img {
+
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.13);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.13);
+    border-radius: 4px;
+    border: 1px solid $dark-blue;
+
+  }
+}
+.banner__row {
+  text-align: center;
+}
+.banner__title {
+  font-size: 37px;
+  color: $blue;
+  padding-bottom: 20px;
+  text-align: center;
+  display: inline-block;
+  padding-right: 91px;
+}
+.banner__title-icon {
+  display: inline-block;
+  width: 64px;
+  height: 50px;
+  background-image:  url("../images/money.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  top: 9px;
+}
+.banner__txt {
+  color: $gray-txt;
+  font-size: 14px;
+  text-align: justify;
+}
+.banner__row{
+  width: 100%;
+}
+.banner__getstarted {
+  margin-top: 20px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  &:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #d5d8dc;
+    position: absolute;
+    top: 20px;
+    left: 0;
+  }
+}
+.getstarted__wrap {
+  padding: 0 25px;
+  background: $main-bg ;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+.getstarted {
+  background: $yellow;
+  color: #ffffff;
+  text-align: center;
+  padding: 0 25px;
+  height: 42px;
+  font-size: 14px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    color: darken($yellow,10%);
+  }
+}
+.btn-new {
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.1);
+  color: #fff;
+}
+.btn--addnew {
+  background: #fff;
+  border: 1px solid #b5b6b8;
+  color:  #000;
+  padding: 10px 17px;
+  border-radius: 4px;
+}
+
+.bold{
+  font-weight: bold;
+}
+.btn--next {
+  @extend .btn;
+  background: $yellow;
+  color: #fff;
+  &:hover {
+    background: darken($yellow,10%);
+    color: #fff;
+  }
+}
+.building-icon {
+  width: 12px;
+  height: 14px;
+  background-image:  url("../images/building.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+}
+.location-icon {
+  width: 13px;
+  height: 13px;
+  background-image:  url("../images/location-icon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+}
+.question__toppanel {
+  float: right;
+  padding-top: 4px;
+}
+
+/*----
+custom radio buttons
+------------------------------------------------------------------------------------ */
+.radio-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 0;
+  margin-bottom: 0;
+  font-weight: 400;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0 5px;
+
+}
+input[type="radio"] {
+  display:none;
+}
+input[type="radio"] + label {
+  font-size: 12px;
+  color:  #000;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+input[type="radio"]:checked + label {
+  color: #000;
+}
+input[type="radio"] + label span {
+  display:inline-block;
+  width:14px;
+  height:14px;
+  margin:-2px 10px 0 0;
+  vertical-align:middle;
+  cursor:pointer;
+  -moz-border-radius:  50%;
+  border-radius:  50%;
+}
+input[type="radio"] + label span {
+  background-color: $radio-bg;
+  border: 1px solid #b8b9bb;
+}
+
+input[type="radio"]:checked + label span{
+  /*background-color: orange;*/
+  //color: $blue;
+
+  position: relative;
+  border: 1px solid #b8b9bb;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  @include transition($gTransition);
+}
+input[type=radio]:checked + label span:before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  content: " ";
+  color: $yellow;
+  background: $yellow;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 36px;
+  font-size: 12px;
+  box-shadow:  0 2px 3px rgba(0, 0, 0, 0.05);
+
+}
+input[type="text"].input-mini {
+  width: 88px;
+  height: 36px;
+  position: relative;
+  top: 2px;
+  padding: 3px 10px;
+  border-color: #d7e0f1;
+  box-shadow:  0 2px 3px rgba(0, 0, 0, 0.05);
+}
+.form-control.select-el {
+  box-shadow: none;
+  border: 1px solid #b5b6b8;
+  min-width: 200px;
+}
+.form-control.select-el option:checked  {
+  color: $blue;
+}
+.selected {
+  color: $blue;
+}
+.select-bordered {
+  border: 1px solid #b5b6b8;
+
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 36px;
+}
+.percent-info {
+  display: inline-block;
+}
+.method-span {
+  padding-top: 5px;
+  display: inline-block;
+}
+.percent-span {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+.method-span1 {
+
+}
+
+
+/*-- range style */
+
+input[type=range] {
+
+  /*removes default webkit styles*/
+  -webkit-appearance: none;
+  /*fix for FF unable to apply focus style bug */
+  border: 1px solid white;
+  /*required for proper track sizing in FF*/
+
+  width: 90%;
+  display: inline-block;
+  margin-top: 20px;
+
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 90%;
+  height: 2px;
+  background: $yellow;
+  border: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: $yellow;
+  margin-top: -7px;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $yellow;
+}
+
+input[type=range]::-moz-range-track {
+  width: 90%;
+  height: 2px;
+  background: $yellow;
+  border: none;
+  border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: $yellow;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+  width: 90%;
+  height: 2px;
+
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: $yellow;
+  border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: $yellow;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: $yellow;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: $yellow;
+}
+
+/*---*/
+
+.room-icon {
+  width: 17px;
+  height: 17px;
+  background-image: url("../images/ddf.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  margin-right: 10px;
+}
+
+.quest-room-type__row {
+  border-top: 1px solid #e5e5e5;
+  position: relative;
+  padding: 18px 0;
+  &:first-child {
+    border-top: none;
+  }
+
+}
+.room__remove {
+  position: absolute;
+  right: 10px;
+  font-size: 14px;
+  color: #5bb2d8;
+  cursor: pointer;
+  top: 22px;
+
+}
+.room-count {
+  max-width: 88px;
+}
+.number-of-rooms {
+  max-width: 120px;
+}
+.total-count {
+  font-family: $fontcoquette;
+  font-size: 34px;
+  text-align: right;
+  color: $blue;
+  padding-top: 24px;
+}
+
+.method-conditioned {
+  border-top: 1px solid #e5e5e5;
+  position: relative;
+  padding: 18px 0;
+  &.disabled {
+    color: #dadadb;
+  }
+}
+
+.percent-info {
+  width:88px;
+  text-align: right;
+}
+
+.method-conditioned__select {
+  width: 180px;
+}
+.wrap-checkbox {
+
+}
+.other-property {
+  border-radius: 4px;
+  border: 2px solid #b5b6b8;
+  width: 100%;
+  height: 120px;
+  position: relative;
+  cursor: pointer;
+  &.active {
+    border: 2px solid $blue;
+  }
+}
+.details {
+  width: 200px;
+
+}
+.details__row {
+  width: 100%;
+  margin-top: 10px;
+}
+.other-property__img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+  position: absolute;
+
+}
+.other-property__img1 {
+  @extend .other-property__img;
+  width: 80px;
+  height: 74px;
+  background-image: url("../images/parking.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -35px;
+}
+
+.other-property__img1 {
+  @extend .other-property__img;
+  width: 70px;
+  height: 64px;
+  background-image: url("../images/parking.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+  top: 10px;
+  left: 50%;
+  margin-left: -40px;
+}
+.wrap-radio__label {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  font-weight: 300;
+
+}
+
+.other-property__img2 {
+  @extend .other-property__img;
+  width: 69px;
+  height: 70px;
+  background-image: url("../images/restaraunt.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+
+  top: 10px;
+  left: 50%;
+  margin-left: -35px;
+}
+
+.other-property__img3 {
+  @extend .other-property__img;
+  width: 70px;
+  height: 71px;
+  background-image: url("../images/retail.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+
+  top: 10px;
+  left: 50%;
+  margin-left: -35px;
+}
+.other-property__img4{
+  @extend .other-property__img;
+  width: 70px;
+  height: 71px;
+  background-image: url("../images/pool.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+
+  top: 10px;
+  left: 50%;
+  margin-left: -35px;
+}
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 4px;
+}
