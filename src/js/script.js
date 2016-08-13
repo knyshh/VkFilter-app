@@ -12,6 +12,60 @@ function deleteFromList(role, uid){ //удалить наш список фил�
 function addToList(role, uid){ //обновить в  наш список в фильтр
 
 }
+let drag;
+var dragSrcEl = null;
+function handledragEnd(e) {
+    drag = e.target.closest('.filter__item');
+    console.log('dragend');
+    drag.style.opacity = 1;
+}
+function handledragStart(e) {
+    console.log('dragstart');
+    dragSrcEl = this;
+    drag = e.target.closest('.filter__item');
+    drag.style.opacity = .5;
+    drag.classList.add('move');
+
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.drag);
+
+    return true;
+}
+function handleDragEnter(e) {
+    // this / e.target is the current hover target.
+    this.classList.add('over');
+}
+function handleDragLeave(e) {
+    this.classList.remove('over');  // this / e.target is previous target element.
+}
+function handledragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    console.log('dragover');
+    return false;
+}
+
+function handleDrop(e) {
+    let filterContainer = document.getElementById('filteredList'); //cоседний контейнер куда вставляем  елемент
+    let filterContainer2 = document.querySelector('#friendsList');
+    let btn = drag.querySelector('.filter__addfriend');
+
+        dragSrcEl.innerHTML = this.innerHTML;
+        this.innerHTML = e.dataTransfer.getData('text/html');
+
+    if(e.target.className == "filter__list-container--filterred"){
+        toogleBtn(btn);
+        filterContainer.appendChild(drag);
+    }
+    else if(e.target.className == "filter__row"){
+        console.log('className'+e.target.className);
+        toogleBtn(btn);
+        filterContainer2.insertBefore(drag, filterContainer2.firstChild);
+    };
+}
+
 
 function toogleBtn(el){
     if (el.dataset.btn == 'addtolist' ){
@@ -121,19 +175,18 @@ new Promise(function(resolve) {
 
                 //поиск
                 searchField.addEventListener('keyup', function(e){check(e,serverAnswer.response.items)} );
-
                 searchFieldinFilter.addEventListener('keyup', function(e){check2(e)} );
 
-               /* document.querySelectorAll('.filter-input').forEach(el => {
-                    el.addEventListener('keyup', e => this.filterList(e));
-                });*/
-
+                //gперенос удаление из списка
                 frindslist.addEventListener('click', function(e){moveToFilter(e)} );
                 filteredList.addEventListener('click', function(e){removeFromFilter(e)} );
 
-                //workArea.addEventListener('dragstart', function(e){dragStart(e)});
-                //workArea.addEventListener('dragover', function(e){dragOver(e)});
-                //workArea.addEventListener('drop', function(e){drop(e)});
+                workArea.addEventListener('dragstart', function(e){handledragStart(e)},false);
+                workArea.addEventListener('dragend', function(e){handledragEnd(e)});
+                workArea.addEventListener('dragover', function(e){handledragOver(e)});
+                workArea.addEventListener('dragenter', handleDragEnter, false)
+                workArea.addEventListener('dragleave', handleDragLeave, false);
+                workArea.addEventListener('drop', function(e){handleDrop(e)});
 
                 resolve();
             }

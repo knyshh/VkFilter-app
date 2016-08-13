@@ -63,6 +63,9 @@ a,button{
   height: 300px;
   overflow-y: scroll;
 }
+.filter__list-container--filterred {
+  @extend .filter__list-container;
+}
 .filter {
   width: 620px;
   height: 490px;
@@ -128,4 +131,7 @@ a,button{
 }
 .hidden {
   display: none;
+}
+.over {
+   border: 2px dashed #000;
 }

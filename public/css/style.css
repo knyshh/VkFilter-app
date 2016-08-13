@@ -50,6 +50,15 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
 
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element; }
+
 /* #Table
 ------------------------------------------------------------------------------- */
 table {
@@ -228,7 +237,7 @@ a, button {
     height: 100%;
     cursor: pointer; }
 
-.filter__list-container {
+.filter__list-container, .filter__list-container--filterred {
   height: 300px;
   overflow-y: scroll; }
 
@@ -296,3 +305,6 @@ a, button {
 
 .hidden {
   display: none; }
+
+.over {
+  border: 2px dashed #000; }

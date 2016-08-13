@@ -6,7 +6,7 @@
 
 <head>
 
-	<title>Self Services</title>
+	<title>filter</title>
 
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -60,7 +60,7 @@
                                     <script type="text/x-handlebars-template" id="friendsItem">
                                         <ul class="filter__list filter-list-all-js"  id="friendsList">
                                                 {{#each list}}
-                                                <li class="filter__item">
+                                                <li class="filter__item" data-list="main" draggable="true">
                                                     <div class="filter__row">
                                                             <figure class="filter__avatar"><img src="{{ photo_50}}" alt="{{first_name}} {{last_name}}" class="pull-left" style="margin-right: 20px;"></figure>
 
@@ -78,7 +78,7 @@
 
                             </div>
                             <div class="col-md-6">
-                                <div class="filter__list-container">
+                                <div class="filter__list-container--filterred">
                                     <ul class="filter__list  filter-list-created-js" id="filteredList">
 
                                     </ul>
