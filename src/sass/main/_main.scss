@@ -59,6 +59,10 @@ a,button{
 .header {
 
 }
+.filter__list-container {
+  height: 300px;
+  overflow-y: scroll;
+}
 .filter {
   width: 620px;
   height: 490px;
@@ -117,4 +121,11 @@ a,button{
 .filter__search {
   background: $light-grey;
   padding: 10px;
+}
+.filter__footer {
+  width: 100%;
+  display: inline-block;
+}
+.hidden {
+  display: none;
 }

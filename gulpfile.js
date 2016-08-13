@@ -3,6 +3,17 @@ var browserify = require('gulp-browserify');
 //var browserSync = require('browser-sync');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
+var babel = require("gulp-babel");
+
+
+
+gulp.task("babel", function () {
+    return gulp.src("src/app.js")
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist'))
+});
 
 gulp.task('sass', function () {
     return gulp.src('src/sass/style.scss')
@@ -19,6 +30,7 @@ gulp.task('scripts', function() {
             //debug : !gulp.env.production
         }))
         .pipe(gulp.dest('./public/js'));
+
 });
 
 gulp.task('server',['sass','scripts'], function () {

@@ -1,6 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 let searchField = document.getElementById('searchInput'),
+    searchFieldinFilter = document.getElementById('searchInputInFilter'),
     frindslist = document.getElementById('results'),
     filteredList = document.getElementById('filteredList'),
     workArea = document.querySelector('.filter__list-wrap');
@@ -26,37 +27,46 @@ function toogleBtn(el){
     }
 }
 
-function filter(e) {//search
-    let value = e.target.value;
-    let name = item.querySelector('.filter__name');
 
+function check2(e,value){
+   /* let  newarr = value.filter(function(a) {
+        if ((a.first_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1) ||  (a.last_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1)) {
+            return  true;
+        }
+        else {
+            return false;
+        }
+    })*/
 
-    //let  searchList = serverAnswer.response.filter(item.first_name => item.first_name.indexOf(e.target.value) != -1); //есть  подстрока
-    //serverAnswer.response.response[0].first_name
-    /*  let source = document.querySelector('#searchInput').innerHTML;
-     let templateFn = Handlebars.compile(source);
-     let template = templateFn({list: searchList});
-     results.innerHTML = template;*/
+    let filteredItmes = document.querySelectorAll('#filteredList .filter__row');
+    let valuetarget = e.target.value;
+
+    filteredItmes.forEach(item => {
+        let fullname = item.querySelector('.filter__name').textContent;
+        if(!fullname.toLowerCase().includes(valuetarget.toLowerCase())){
+            item.classList.add('hidden');
+        }else if(item.classList.contains('hidden')){
+            item.classList.remove('hidden');
+        }
+});
+
 }
 
 function check(e,value){
-    let newarr = [];
-    newarr = value.filter(function(a) {
-        console.log(a.first_name);
-        console.log(e.target.value);
-        if (a.first_name.indexOf(e.target.value) != -1) {
-            if(e.target.value.length > 0 ) {
+   let  newarr = value.filter(function(a) {
 
-                let source =  friendsItem.innerHTML;
-                let templateFn = Handlebars.compile(source);
-                let template = templateFn({list: newarr});
-                results.innerHTML = template
-            }
+        if ((a.first_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1) ||  (a.last_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1)) {
+            return  true;
         }
         else {
-            console.log('ffff');
-        }
+            return false;
+       }
     });
+
+    let source =  friendsItem.innerHTML;
+    let templateFn = Handlebars.compile(source);
+    let template = templateFn({list: newarr});
+    results.innerHTML = template;
 }
 
 function moveToFilter(e, tagret){
@@ -109,8 +119,11 @@ new Promise(function(resolve) {
                 let templateFn = Handlebars.compile(source);
                 let template = templateFn({ list:  serverAnswer.response.items });
                 results.innerHTML = template;
-                
-                searchField.addEventListener('keyup', function(e){check(e,arr)} );
+
+                //поиск
+                searchField.addEventListener('keyup', function(e){check(e,serverAnswer.response.items)} );
+
+                searchFieldinFilter.addEventListener('keyup', function(e){check2(e)} );
 
                /* document.querySelectorAll('.filter-input').forEach(el => {
                     el.addEventListener('keyup', e => this.filterList(e));

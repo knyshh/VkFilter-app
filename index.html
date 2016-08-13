@@ -28,10 +28,9 @@
     <div class="main-container">
         <div class="container">
             <header class="page__header">
-                <h1 class="page__maintitle"></h1>
+                <h1 class="page__maintitle">другофильтр</h1>
             </header>
-
-            <button class="go-filter-js">Go to Filter</button>
+            <div id="results2"></div>
 
             <div class="filter">
                 <header class="filter__header">
@@ -43,10 +42,10 @@
                     <div class="filter__search">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Начните вводить имя друга" value=""  id="searchInput" name="" > <i class="fa fa-search" aria-hidden="true"></i>
+                                <input type="text" class="form-control" placeholder="Начните вводить имя друга" value=""  data-search="infrinds"  id="searchInput" name="" > <i class="fa fa-search" aria-hidden="true"></i>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Название" value=""  name="" >
+                                <input type="text" class="form-control" placeholder="Название" value="" data-search="infilter" id="searchInputInFilter" name="" >
                             </div>
                         </div>
                     </div><!-- /filter__search -->
@@ -79,10 +78,11 @@
 
                             </div>
                             <div class="col-md-6">
-                                <ul class="filter__list  filter-list-created-js" id="filteredList">
+                                <div class="filter__list-container">
+                                    <ul class="filter__list  filter-list-created-js" id="filteredList">
 
-                                </ul>
-
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div><!-- /filter__list-wrap -->
