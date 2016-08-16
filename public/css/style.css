@@ -112,15 +112,16 @@ input[type="tel"],
 select,
 textarea {
   font-family: "Fira Sans", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   color: #000;
-  background: transparent;
+  background: #fff;
   resize: vertical;
   padding-top: 10px;
   padding-bottom: 8px;
   font-weight: 400;
   outline: none;
-  letter-spacing: 1px; }
+  border-radius: 13px;
+  border: none; }
 
 select,
 textarea {
@@ -237,6 +238,12 @@ a, button {
     height: 100%;
     cursor: pointer; }
 
+.page__maintitle {
+  text-align: center;
+  font-size: 20px;
+  color: #ff8663;
+  margin: 30px; }
+
 .filter__list-container, .filter__list-container--filterred {
   height: 300px;
   overflow-y: scroll; }
@@ -244,7 +251,8 @@ a, button {
 .filter {
   width: 620px;
   height: 490px;
-  border-radius: 6px; }
+  border-radius: 6px;
+  margin: 0 auto; }
 
 .filter__header {
   border-radius: 6px 6px  0 0;
@@ -259,7 +267,8 @@ a, button {
   font-size: 16px;
   font-weight: 500;
   display: inline-block;
-  width: 100%; }
+  width: 100%;
+  margin-top: 14px; }
 
 .filter__close {
   color: #fff;
@@ -272,14 +281,17 @@ a, button {
   display: inline-block;
   width: 100%;
   position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 8px; }
   .filter__row:hover {
     background: #f0f0f0; }
 
 .filter__addfriend {
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 18px;
   font-size: 16px;
   color: #c4c4c4; }
 
@@ -301,10 +313,44 @@ a, button {
 
 .filter__footer {
   width: 100%;
-  display: inline-block; }
+  display: inline-block;
+  background: #f0f0f0;
+  min-height: 42px;
+  padding: 8px;
+  border-radius: 0 0 6px 6px; }
 
 .hidden {
   display: none; }
 
 .over {
   border: 2px dashed #000; }
+
+.filter__btn {
+  background: #ff8663;
+  color: #fff;
+  float: right; }
+  .filter__btn:hover {
+    background: #ff4b17;
+    color: #fff; }
+
+.filter__search-wrap {
+  position: relative; }
+
+.filter__search-icon {
+  position: absolute;
+  left: 21px;
+  top: 9px;
+  font-size: 13px;
+  color: #b2b2b2; }
+
+.filter__search-input {
+  max-width: 90%;
+  padding-left: 25px; }
+
+.filter__row-title {
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 6px;
+  padding-left: 11px; }

@@ -109,15 +109,16 @@ input[type="tel"],
 select,
 textarea{
   font-family: $fontDefault;
-  font-size: 12px;
+  font-size: 13px;
   color: #000;
-  background: transparent;
+  background: $white;
   resize: vertical;
   padding-top: 10px;
   padding-bottom: 8px;
   font-weight: 400;
   outline: none;
-  letter-spacing: 1px;
+  border-radius: 13px;
+  border: none;
 
 }
 input[type="text"],

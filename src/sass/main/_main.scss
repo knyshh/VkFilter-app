@@ -59,6 +59,12 @@ a,button{
 .header {
 
 }
+.page__maintitle {
+  text-align: center;
+  font-size: 20px;
+  color: $red;
+  margin : 30px;
+}
 .filter__list-container {
   height: 300px;
   overflow-y: scroll;
@@ -70,6 +76,7 @@ a,button{
   width: 620px;
   height: 490px;
   border-radius: 6px;
+  margin: 0 auto;
 }
 .filter__header {
   border-radius: 6px 6px  0 0;
@@ -85,6 +92,7 @@ a,button{
   font-weight: 500;
   display: inline-block;
   width: 100%;
+  margin-top: 14px;
 }
 .filter__close {
   color:  $white;
@@ -98,14 +106,20 @@ a,button{
   width: 100%;
   position: relative;
   cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid $light-grey;
+  padding: 8px;
   &:hover {
     background: $light-grey;
   }
 }
+.filter__item {
+
+}
 .filter__addfriend {
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 18px;
   font-size: 16px;
   color: $grey;
 }
@@ -128,6 +142,10 @@ a,button{
 .filter__footer {
   width: 100%;
   display: inline-block;
+  background: $light-grey;
+  min-height: 42px;
+  padding: 8px;
+  border-radius: 0 0 6px 6px;
 }
 .hidden {
   display: none;
@@ -135,3 +153,39 @@ a,button{
 .over {
    border: 2px dashed #000;
 }
+.filter__btn {
+  background: $red;
+  color: $white;
+  float: right;
+
+  &:hover {
+    background: darken($red,15%);
+    color: $white;
+  }
+}
+.filter__search-wrap {
+  position: relative;
+
+}
+.filter__search-icon {
+  position: absolute;
+  left: 21px;
+  top: 9px;
+  font-size: 13px;
+  color: $icon-gray;
+}
+
+
+.filter__search-input {
+  max-width: 90%;
+  padding-left: 25px;
+}
+.filter__row-title {
+  font-size: 14px;
+  border-bottom: 1px solid $light-grey;
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 6px;
+  padding-left: 11px;
+}
+

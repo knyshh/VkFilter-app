@@ -41,11 +41,13 @@
                 <div class="filter__body">
                     <div class="filter__search">
                         <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Начните вводить имя друга" value=""  data-search="infrinds"  id="searchInput" name="" > <i class="fa fa-search" aria-hidden="true"></i>
+                            <div class="col-md-6 filter__search-wrap">
+                                <input type="text" class="filter__search-input form-control" placeholder="Начните вводить имя друга" value=""  data-search="infrinds"  id="searchInput" name="" >
+                                <i class="filter__search-icon fa fa-search" aria-hidden="true"></i>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 filter__search-wrap">
                                 <input type="text" class="form-control" placeholder="Название" value="" data-search="infilter" id="searchInputInFilter" name="" >
+
                             </div>
                         </div>
                     </div><!-- /filter__search -->
@@ -54,13 +56,14 @@
 
                         <div class="row">
                             <div class="col-md-6">
+                                <h3 class="filter__row-title">Ваши друзья</h3>
                                 <div class="filter__list-container">
                                     <div id="results"></div>
 
                                     <script type="text/x-handlebars-template" id="friendsItem">
                                         <ul class="filter__list filter-list-all-js"  id="friendsList">
                                                 {{#each list}}
-                                                <li class="filter__item" data-list="main" draggable="true">
+                                                <li class="filter__item" data-list="main" draggable="true" data-id="{{id}}">
                                                     <div class="filter__row">
                                                             <figure class="filter__avatar"><img src="{{ photo_50}}" alt="{{first_name}} {{last_name}}" class="pull-left" style="margin-right: 20px;"></figure>
 
@@ -78,6 +81,7 @@
 
                             </div>
                             <div class="col-md-6">
+                                <h3 class="filter__row-title">Друзья в списке</h3>
                                 <div class="filter__list-container--filterred">
                                     <ul class="filter__list  filter-list-created-js" id="filteredList">
 
@@ -90,7 +94,7 @@
                 </div><!-- /filter__body -->
 
                 <footer class="filter__footer">
-                    <button class="filter__btn filter-save-js">Сохранить</button>
+                    <button class="btn filter__btn filter-save-js">Сохранить</button>
                 </footer><!-- /filter__header  -->
             </div><!-- /filter -->
 

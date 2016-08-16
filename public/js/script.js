@@ -4,15 +4,14 @@ let searchField = document.getElementById('searchInput'),
     searchFieldinFilter = document.getElementById('searchInputInFilter'),
     frindslist = document.getElementById('results'),
     filteredList = document.getElementById('filteredList'),
+    saveBtn = document.querySelector('.filter-list-created-js'),
     workArea = document.querySelector('.filter__list-wrap');
 
-function deleteFromList(role, uid){ //удалить наш список фильтра
+let inList = JSON.parse(localStorage.getItem('inList')) || [];  //
+let outList = JSON.parse(localStorage.getItem('outList'));
 
-}
 
-function addToList(role, uid){ //обновить в  наш список в фильтр
-
-}
+/*------ drag n drop functions ---------*/
 let drag;
 var dragSrcEl = null;
 function handledragEnd(e) {
@@ -66,23 +65,24 @@ function handleDrop(e) {
         filterContainer2.insertBefore(drag, filterContainer2.firstChild);
     };
 }
+/*------ /end drag n drop functions ---------*/
 
-
+//toogle class and icon
 function toogleBtn(el){
     if (el.dataset.btn == 'addtolist' ){
         el.classList.remove('fa-plus');
-        el.classList.add('fa-minus');
+        el.classList.add('fa-close');
         el.dataset.btn = 'delete';
     }
     else if (el.dataset.btn == 'delete') {
-        el.classList.remove('fa-minus');
+        el.classList.remove('fa-close');
         el.classList.add('fa-plus');
         el.dataset.btn = 'addtolist';
     }
 }
 
-
-function check2(e,value){
+//search function in list with  filtered friends
+function search2(e,value){
    /* let  newarr = value.filter(function(a) {
         if ((a.first_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1) ||  (a.last_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1)) {
             return  true;
@@ -106,9 +106,9 @@ function check2(e,value){
 
 }
 
-function check(e,value){
+//search function in list with all friends
+function search(e,value){
    let  newarr = value.filter(function(a) {
-
         if ((a.first_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1) ||  (a.last_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1)) {
             return  true;
         }
@@ -123,24 +123,63 @@ function check(e,value){
     results.innerHTML = template;
 }
 
+//function moving to filter items with friends
 function moveToFilter(e, tagret){
         let item = e.target.closest('.filter__item'); //container текущего пользователя
         let filterContainer = document.getElementById('filteredList'); //cоседний контейнер куда вставляем  елемент
     if(e.target.dataset.btn == 'addtolist') {
         toogleBtn(e.target);
         filterContainer.appendChild(item);  //перенести в дом в фильтр
+
+
+        inList.push(item); //занести в  локал сторидж
+        //outList.splice(friendOut, 1); //// начиная с позиции 1, удалить 1 элемент
+
     }
+
 }
 
+//function removing to filter items with filtered frinds to the list  woth all frinds
 function removeFromFilter(e, tagret){
-    let item = e.target.closest('.filter__item'); //container текущего пользователя
-    let filterContainer = document.querySelector('#friendsList'); // контейнер куда вставляем  елемент
+    let item = e.target.closest('.filter__item'); //container current friends
+    let filterContainer = document.querySelector('#friendsList'); // container which is inserted element
 
     if(e.target.dataset.btn == 'delete') {
         toogleBtn(e.target);
         filterContainer.insertBefore(item, filterContainer.firstChild);
     }
+
+    /*
+      inList.push(friendIn);
+        outList.splice(friendOut, 1);
+     */
 }
+
+//save data
+function saveData(e){
+    localStorage.setItem('inList', JSON.stringify(inList));
+    localStorage.setItem('outList', JSON.stringify(outList));
+}
+
+function getSavedFriendsElements() {
+    if(localStorage.friendsList)
+        return JSON.parse(localStorage.friendsList).elements;
+    else return [];
+}
+
+function saveFriendsList() {
+    localStorage.friendsList = JSON.stringify(this);
+}
+
+//function for displaying lists
+
+function displayList(container,templateHtml,outList) {
+    let source = templateHtml.innerHTML;
+    let compileTemplate = Handlebars.compile(source);
+    let template = compileTemplate({ list:  outList })
+    container.innerHTML = template;
+}
+
 
 new Promise(function(resolve) {
     if (document.readyState === 'complete') {
@@ -164,30 +203,45 @@ new Promise(function(resolve) {
     });
 }).then(function() {
     return new Promise(function(resolve, reject) {
-        VK.api('friends.get', {v: '5.53',fields: 'photo_50,first_name,last_name,bdate',name_case: 'nom'}, function(serverAnswer) {
+        VK.api('friends.get', {v: '5.53',fields: 'id,photo_50,first_name,last_name,bdate',name_case: 'nom'}, function(serverAnswer) {
 
             if (serverAnswer.error) {
                 reject(new Error(serverAnswer.error.error_msg));
             } else {
-                let source = friendsItem.innerHTML;
+
+                /*let source = friendsItem.innerHTML;
                 let templateFn = Handlebars.compile(source);
                 let template = templateFn({ list:  serverAnswer.response.items });
-                results.innerHTML = template;
+                results.innerHTML = template;*/
 
-                //поиск
-                searchField.addEventListener('keyup', function(e){check(e,serverAnswer.response.items)} );
-                searchFieldinFilter.addEventListener('keyup', function(e){check2(e)} );
 
-                //gперенос удаление из списка
+                //save  to local storage
+
+               // let inList = JSON.parse(localStorage.getItem('inList')) || [];  //
+                outList = JSON.parse(localStorage.getItem('outList')) ||  serverAnswer.response.items;
+
+                displayList(results, friendsItem, outList); //set list friends
+                //displayList(results2, friendsItem, outList); //set list friends in filter
+
+
+                //search
+                searchField.addEventListener('keyup', function(e){search(e,serverAnswer.response.items)} );
+                searchFieldinFilter.addEventListener('keyup', function(e){search2(e)} );
+
+                //move of remove from the list
                 frindslist.addEventListener('click', function(e){moveToFilter(e)} );
                 filteredList.addEventListener('click', function(e){removeFromFilter(e)} );
 
+                //work with events drag'n'drop
                 workArea.addEventListener('dragstart', function(e){handledragStart(e)},false);
                 workArea.addEventListener('dragend', function(e){handledragEnd(e)});
                 workArea.addEventListener('dragover', function(e){handledragOver(e)});
                 workArea.addEventListener('dragenter', handleDragEnter, false)
                 workArea.addEventListener('dragleave', handleDragLeave, false);
                 workArea.addEventListener('drop', function(e){handleDrop(e)});
+
+                //сохранить оба списка
+                saveBtn.addEventListener('click',  function(e){saveData(e)});
 
                 resolve();
             }
