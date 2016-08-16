@@ -160,7 +160,7 @@ function saveData(e){
     localStorage.setItem('outList', JSON.stringify(outList));
 }
 
-function getSavedFriendsElements() {
+/*function getSavedFriendsElements() {
     if(localStorage.friendsList)
         return JSON.parse(localStorage.friendsList).elements;
     else return [];
@@ -168,7 +168,7 @@ function getSavedFriendsElements() {
 
 function saveFriendsList() {
     localStorage.friendsList = JSON.stringify(this);
-}
+}*/
 
 //function for displaying lists
 
