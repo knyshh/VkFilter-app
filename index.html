@@ -30,7 +30,6 @@
             <header class="page__header">
                 <h1 class="page__maintitle">другофильтр</h1>
             </header>
-            <div id="results2"></div>
 
             <div class="filter">
                 <header class="filter__header">
@@ -82,10 +81,29 @@
                             </div>
                             <div class="col-md-6">
                                 <h3 class="filter__row-title">Друзья в списке</h3>
-                                <div class="filter__list-container--filterred">
-                                    <ul class="filter__list  filter-list-created-js" id="filteredList">
+                                <div class="filter__list-container--filterred" >
+                                    <div id="results2">
 
-                                    </ul>
+
+                                    </div>
+
+
+                                    <script type="text/x-handlebars-template" id="filteredListTemplate">
+                                        <ul class="filter__list  filter-list-created-js" id="filteredList">
+                                            {{#each list}}
+                                            <li class="filter__item" data-list="filter" draggable="true" data-id="{{id}}">
+                                                <div class="filter__row">
+                                                    <figure class="filter__avatar"><img src="{{ photo_50}}" alt="{{first_name}} {{last_name}}" class="pull-left" style="margin-right: 20px;"></figure>
+
+                                                    <div class="filter__name">
+                                                        <p><span>{{first_name}} </span> <span>{{last_name}} </span></p>
+                                                    </div>
+                                                    <i class="filter__addfriend fa fa-close" data-btn="delete" aria-hidden="true"></i>
+                                                </div>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                    </script>
                                 </div>
                             </div>
                         </div>

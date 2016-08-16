@@ -3,8 +3,8 @@
 let searchField = document.getElementById('searchInput'),
     searchFieldinFilter = document.getElementById('searchInputInFilter'),
     frindslist = document.getElementById('results'),
-    filteredList = document.getElementById('filteredList'),
-    saveBtn = document.querySelector('.filter-list-created-js'),
+    filteredList = document.getElementById('results2'),
+    saveBtn = document.querySelector('.filter-save-js'),
     workArea = document.querySelector('.filter__list-wrap');
 
 let inList = JSON.parse(localStorage.getItem('inList')) || [];  //
@@ -16,11 +16,10 @@ let drag;
 var dragSrcEl = null;
 function handledragEnd(e) {
     drag = e.target.closest('.filter__item');
-    console.log('dragend');
     drag.style.opacity = 1;
+    drag.dataset.list = 'filter';
 }
 function handledragStart(e) {
-    console.log('dragstart');
     dragSrcEl = this;
     drag = e.target.closest('.filter__item');
     drag.style.opacity = .5;
@@ -32,7 +31,6 @@ function handledragStart(e) {
     return true;
 }
 function handleDragEnter(e) {
-    // this / e.target is the current hover target.
     this.classList.add('over');
 }
 function handleDragLeave(e) {
@@ -43,27 +41,49 @@ function handledragOver(e) {
         e.preventDefault();
     }
     e.dataTransfer.dropEffect = 'move';
-    console.log('dragover');
     return false;
 }
 
 function handleDrop(e) {
     let filterContainer = document.getElementById('filteredList'); //cоседний контейнер куда вставляем  елемент
-    let filterContainer2 = document.querySelector('#friendsList');
+    let filterContainer2 = document.getElementById('friendsList');
     let btn = drag.querySelector('.filter__addfriend');
+
+    let id = drag.dataset.id;
+    let itemOut = outList.findIndex(item => item == id);
+
+    let itemOutList = drag.dataset.id; //id пользователя которого удаляем
+    let itemInList = inList.findIndex(item => item == itemOutList);
 
         dragSrcEl.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
 
-    if(e.target.className == "filter__list-container--filterred"){
+    if(drag.dataset.list == "main"){
         toogleBtn(btn);
+
         filterContainer.appendChild(drag);
+
+        inList.push(id);
+        outList.splice(itemOut, 1);
+
+        console.log('id'+id);
+        console.log('itemOut'+itemOut);
+        console.log('inlist'+inList);
+
     }
-    else if(e.target.className == "filter__row"){
-        console.log('className'+e.target.className);
-        toogleBtn(btn);
-        filterContainer2.insertBefore(drag, filterContainer2.firstChild);
-    };
+    else if(drag.dataset.list == "filter"){
+            toogleBtn(btn);
+            filterContainer2.insertBefore(drag, filterContainer2.firstChild);
+
+            outList.push(itemOutList); //занести в список елемент
+            inList.splice(itemInList,1);//удалить из  списка елемент*/
+
+        console.log('itemOutList'+itemOutList);
+        console.log('itemInList'+itemInList);
+        console.log('inlist'+inList);
+
+    }
+
 }
 /*------ /end drag n drop functions ---------*/
 
@@ -73,25 +93,19 @@ function toogleBtn(el){
         el.classList.remove('fa-plus');
         el.classList.add('fa-close');
         el.dataset.btn = 'delete';
+        el.closest('.filter__item').dataset.list ='filter';
     }
     else if (el.dataset.btn == 'delete') {
         el.classList.remove('fa-close');
         el.classList.add('fa-plus');
         el.dataset.btn = 'addtolist';
+        el.closest('.filter__item').dataset.list ='main';
+
     }
 }
 
 //search function in list with  filtered friends
 function search2(e,value){
-   /* let  newarr = value.filter(function(a) {
-        if ((a.first_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1) ||  (a.last_name.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1)) {
-            return  true;
-        }
-        else {
-            return false;
-        }
-    })*/
-
     let filteredItmes = document.querySelectorAll('#filteredList .filter__row');
     let valuetarget = e.target.value;
 
@@ -124,35 +138,41 @@ function search(e,value){
 }
 
 //function moving to filter items with friends
-function moveToFilter(e, tagret){
+function moveToFilter(e, tagret , responsearray){
         let item = e.target.closest('.filter__item'); //container текущего пользователя
+        let id = e.target.closest('.filter__item').dataset.id; //id пользователя которого добавляем
+        let itemOut = outList.findIndex(item => item == id);
         let filterContainer = document.getElementById('filteredList'); //cоседний контейнер куда вставляем  елемент
+
     if(e.target.dataset.btn == 'addtolist') {
         toogleBtn(e.target);
         filterContainer.appendChild(item);  //перенести в дом в фильтр
 
-
-        inList.push(item); //занести в  локал сторидж
-        //outList.splice(friendOut, 1); //// начиная с позиции 1, удалить 1 элемент
-
+        //update data for localstorage
+        inList.push(id);
+        outList.splice(itemOut, 1);
     }
 
 }
 
 //function removing to filter items with filtered frinds to the list  woth all frinds
-function removeFromFilter(e, tagret){
+function removeFromFilter(e, responsearray){
     let item = e.target.closest('.filter__item'); //container current friends
     let filterContainer = document.querySelector('#friendsList'); // container which is inserted element
+
+    let itemOutList = e.target.closest('.filter__item').dataset.id; //id пользователя которого удаляем
+    let itemInList = inList.findIndex(item => item == itemOutList);
 
     if(e.target.dataset.btn == 'delete') {
         toogleBtn(e.target);
         filterContainer.insertBefore(item, filterContainer.firstChild);
+
+        //update data for localstorage
+        outList.push(itemOutList); //занести в список елемент
+        inList.splice(itemInList,1);//удалить из  списка елемент
+
     }
 
-    /*
-      inList.push(friendIn);
-        outList.splice(friendOut, 1);
-     */
 }
 
 //save data
@@ -160,16 +180,6 @@ function saveData(e){
     localStorage.setItem('inList', JSON.stringify(inList));
     localStorage.setItem('outList', JSON.stringify(outList));
 }
-
-/*function getSavedFriendsElements() {
-    if(localStorage.friendsList)
-        return JSON.parse(localStorage.friendsList).elements;
-    else return [];
-}
-
-function saveFriendsList() {
-    localStorage.friendsList = JSON.stringify(this);
-}*/
 
 //function for displaying lists
 
@@ -209,27 +219,41 @@ new Promise(function(resolve) {
                 reject(new Error(serverAnswer.error.error_msg));
             } else {
 
-                /*let source = friendsItem.innerHTML;
-                let templateFn = Handlebars.compile(source);
-                let template = templateFn({ list:  serverAnswer.response.items });
-                results.innerHTML = template;*/
+                let newarr= [];
+                let arrayId =  serverAnswer.response.items.filter(function(item,i,arr) {
+                    newarr.push(item.id);
+                    return true;
+                });
+                outList = JSON.parse(localStorage.getItem('outList')) ||  newarr;
+                //console.log('newarr'+newarr);
 
 
-                //save  to local storage
+                let setFilterList = serverAnswer.response.items.filter(function(item,i) {
+                    for(let i = 0; i< inList.length; i++) {
+                        if(item.id == inList[i]){
+                            return true;
+                        }
+                    }
+                });
 
-               // let inList = JSON.parse(localStorage.getItem('inList')) || [];  //
-                outList = JSON.parse(localStorage.getItem('outList')) ||  serverAnswer.response.items;
+                let setFilterAll = serverAnswer.response.items.filter(function(item,i) {
+                    for(let j = 0; j< newarr.length; j++) {
+                        if(item.id == newarr[i]){
+                            return true;
+                        }
+                    }
+                });
 
+                //set lists
                 displayList(results, friendsItem, outList); //set list friends
-                //displayList(results2, friendsItem, outList); //set list friends in filter
-
+                displayList(filteredList, filteredListTemplate, setFilterList); //set list friends in filter
 
                 //search
                 searchField.addEventListener('keyup', function(e){search(e,serverAnswer.response.items)} );
                 searchFieldinFilter.addEventListener('keyup', function(e){search2(e)} );
 
                 //move of remove from the list
-                frindslist.addEventListener('click', function(e){moveToFilter(e)} );
+                frindslist.addEventListener('click', function(e){moveToFilter(e,serverAnswer.response.items)} );
                 filteredList.addEventListener('click', function(e){removeFromFilter(e)} );
 
                 //work with events drag'n'drop
