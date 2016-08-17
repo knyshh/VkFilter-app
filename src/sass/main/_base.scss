@@ -83,7 +83,6 @@ a:active {
 *:focus {
   outline: none;
 }
-
 /* #Lists
  ----------------------------------------------------------------------*/
 ol {
@@ -119,20 +118,6 @@ textarea{
   outline: none;
   border-radius: 13px;
   border: none;
-
-}
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-textarea{
-
-
-}
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"] {
 }
 
 select,
